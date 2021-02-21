@@ -1,8 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/globals.css';
+import '@/styles/index.scss';
+import PageLayout from '@/components/PageLayout';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+const App = ({ Component, pageProps }) => {
+  return (
+    <PageLayout>
+      <Component {...pageProps} />;
+    </PageLayout>
+  );
+};
 
-export default MyApp;
+export default App;
