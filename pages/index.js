@@ -5,20 +5,18 @@ import CardItem from '@/components/CardItem';
 
 const Home = () => {
   return (
-    <>
-      <div className="blog-detail-page">
-        <AuthorIntro />
-        <hr />
-        <Row className="mb-5">
-          <Col md="10">
-            <CardListItem />
-          </Col>
-          <Col md="4">
-            <CardItem />
-          </Col>
-        </Row>
-      </div>
-    </>
+    <div className="blog-detail-page">
+      <AuthorIntro />
+      <hr />
+      <Row className="mb-5">
+        <Col md="10">
+          <CardListItem />
+        </Col>
+        <Col md="4">
+          <CardItem />
+        </Col>
+      </Row>
+    </div>
   );
 };
 
