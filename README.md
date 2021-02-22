@@ -1,12 +1,12 @@
-# Next.JS with Sanity CMS - Serverless Blog App
+# Next JS with Sanity CMS - Serverless Blog App
 
 > Blog App with the latest Next.JS & React(React hooks). Learning how to use headless Sanity CMS.
 
 ## Running Locally
 
 ```bash
-$ git clone next.js-sanity-cms-serverless-blog-app
-$ cd  next.js-sanity-cms-serverless-blog-app
+$ git clone serverless-blog-app
+$ cd serverless-blog-app
 $ yarn
 $ yarn dev
 ```
