@@ -5,8 +5,8 @@
 ## Running Locally
 
 ```bash
-$ git clone next.js-sanity-cms-serverless-blog-app
-$ cd  next.js-sanity-cms-serverless-blog-app
+$ git clone serverless-blog-app
+$ cd serverless-blog-app
 $ yarn
 $ yarn dev
 ```
