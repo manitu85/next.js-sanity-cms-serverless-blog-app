@@ -1,4 +1,4 @@
-# Next.JS with Sanity CMS - Serverless Blog App
+# Next JS with Sanity CMS - Serverless Blog App
 
 > Blog App with the latest Next.JS & React(React hooks). Learning how to use headless Sanity CMS.
 
