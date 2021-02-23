@@ -40,9 +40,9 @@ const Home = ({ blogs }) => {
             <CardItem
               title={blog.title}
               subtitle={blog.subtitle}
+              author={blog.author}
               date={blog.date}
               image={blog.coverImage}
-              author={blog.author}
             />
           </Col>
         ))}
