@@ -14,23 +14,22 @@ export async function getStaticProps(context) {
   };
 }
 
-export async function getStaticPaths() {
-  const blogs = await getAllBlogs();
-  const paths = blogs.map((blog) => ({
-    params: { slug: blog.slug.current }
-  }));
-  return {
-    paths: paths,
-    fallback: false
-  };
-}
+// export async function getStaticPaths() {
+//   const blogs = await getAllBlogs();
+//   const paths = blogs.map((blog) => ({
+//     params: { slug: blog.slug.current }
+//   }));
+//   return {
+//     paths: paths,
+//     fallback: false
+//   };
+// }
 
 const Home = ({ blogs }) => {
   console.log('blogs :>> ', blogs);
   return (
     <div className="blog-detail-page">
       <AuthorIntro />
-      {JSON.stringify(blogs)}
       <hr />
       <Row className="mb-5">
         <Col md="10">
@@ -43,6 +42,7 @@ const Home = ({ blogs }) => {
               subtitle={blog.subtitle}
               date={blog.date}
               image={blog.coverImage}
+              author={blog.author}
             />
           </Col>
         ))}

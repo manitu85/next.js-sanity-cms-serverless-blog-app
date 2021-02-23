@@ -1,6 +1,6 @@
 import { Card } from 'react-bootstrap';
 
-const CardListItem = () => {
+const CardListItem = ({ author }) => {
   return (
     <Card className={`fj-card fj-card-list`}>
       <div className="card-body-wrapper">
