@@ -43,6 +43,7 @@ const Home = ({ blogs }) => {
               author={blog.author}
               date={blog.date}
               image={blog.coverImage}
+              slug={blog.slug}
             />
           </Col>
         ))}

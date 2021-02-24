@@ -1,11 +1,15 @@
-import React from 'react';
+import NextLink from 'next/link';
 import { Navbar, Nav } from 'react-bootstrap';
 
 const BlogNavbar = () => {
   return (
     <Navbar className="fj-navbar fj-nav-base" bg="transparent" expand="lg">
       <Navbar.Brand className="fj-navbar-brand">
-        <a href="#">Alex Burke</a>
+        <NextLink href={'/'} passHref>
+          <a style={{ textDecoration: 'none' }} href="#">
+            Alex Burke
+          </a>
+        </NextLink>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

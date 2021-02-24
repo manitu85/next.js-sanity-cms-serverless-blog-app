@@ -1,6 +1,7 @@
+import NextLink from 'next/link';
 import { Card } from 'react-bootstrap';
 
-const CardItem = ({ title, subtitle, image, date, author }) => {
+const CardItem = ({ title, subtitle, image, date, author, slug }) => {
   return (
     <Card className={`fj-card`}>
       <div className="card-body-wrapper">
@@ -27,7 +28,9 @@ const CardItem = ({ title, subtitle, image, date, author }) => {
           <Card.Text>{subtitle}</Card.Text>
         </Card.Body>
       </div>
-      <a className="card-button">Read More</a>
+      <NextLink href="/blogs/[slug]" as={`/blogs/${slug}`} passHref>
+        <a className="card-button">Read More</a>
+      </NextLink>
     </Card>
   );
 };

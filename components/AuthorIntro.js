@@ -10,7 +10,7 @@ const AuthorIntro = () => {
             width={64}
             height={64}
             className="mr-3"
-            src="https://avatars1.githubusercontent.com/u/9482724?s=460&u=69a6acab13fd5547a4e316e496b573271077147f&v=4"
+            src={'https://via.placeholder.com/150'}
             alt="Generic placeholder"
           />
           <Media.Body>
