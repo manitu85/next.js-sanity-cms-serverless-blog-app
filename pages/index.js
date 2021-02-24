@@ -5,7 +5,7 @@ import CardItem from '@/components/CardItem';
 import { getAllBlogs } from '@/lib/api';
 
 export async function getStaticProps(context) {
-  console.log('Calling getStaticProps');
+  // console.log('Calling getStaticProps');
   const blogs = await getAllBlogs();
   return {
     props: {
@@ -14,19 +14,7 @@ export async function getStaticProps(context) {
   };
 }
 
-// export async function getStaticPaths() {
-//   const blogs = await getAllBlogs();
-//   const paths = blogs.map((blog) => ({
-//     params: { slug: blog.slug.current }
-//   }));
-//   return {
-//     paths: paths,
-//     fallback: false
-//   };
-// }
-
 const Home = ({ blogs }) => {
-  console.log('blogs :>> ', blogs);
   return (
     <div className="blog-detail-page">
       <AuthorIntro />

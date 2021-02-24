@@ -28,7 +28,7 @@ const CardItem = ({ title, subtitle, image, date, author, slug }) => {
           <Card.Text>{subtitle}</Card.Text>
         </Card.Body>
       </div>
-      <NextLink href="/blogs/[slug]" as={`/blogs/${slug}`} passHref>
+      <NextLink as={`/blogs/${slug}`} href="/blogs/[slug]">
         <a className="card-button">Read More</a>
       </NextLink>
     </Card>
