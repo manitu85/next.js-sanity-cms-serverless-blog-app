@@ -20,21 +20,31 @@ export async function getStaticProps(context) {
 
 const Home = ({ blogs }) => {
   const [filter, setFilter] = useState({
-    view: { list: 1 }
+    view: { list: 0 }
   });
+
   return (
     <div className="blog-detail-page">
       <AuthorIntro />
-      <FilteringMenu onChange={() => {}} />
+      <FilteringMenu
+        filter={filter}
+        onChange={(option, value) => {
+          setFilter({ ...filter, [option]: value });
+        }}
+      />
       <hr />
       <Row className="mb-5">
-        <Col md="10">
-          <CardListItem />
-        </Col>
         {blogs.map((blog) =>
           filter.view.list ? (
-            <Col md="9">
-              <CardListItem />
+            <Col key={`${blog.slug}-list`} md="9">
+              <CardListItem
+                author={blog.author}
+                title={blog.title}
+                subtitle={blog.subtitle}
+                date={blog.date}
+                image={blog.coverImage}
+                slug={blog.slug}
+              />
             </Col>
           ) : (
             <Col key={blog.slug} md="4">
@@ -44,10 +54,7 @@ const Home = ({ blogs }) => {
                 subtitle={blog.subtitle}
                 date={blog.date}
                 image={blog.coverImage}
-                link={{
-                  href: '/blogs/[slug]',
-                  as: `/blogs/${blog.slug}`
-                }}
+                slug={blog.slug}
               />
             </Col>
           )
