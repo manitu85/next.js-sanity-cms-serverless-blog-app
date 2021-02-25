@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import useSWR from 'swr';
 
 import AuthorIntro from '@/components/AuthorIntro';
 import CardListItem from '@/components/CardListItem';
@@ -7,6 +8,7 @@ import CardItem from '@/components/CardItem';
 import FilteringMenu from 'components/FilteringMenu';
 
 import { getAllBlogs } from '@/lib/api';
+import { fetcher } from '@/lib/fetcher';
 
 export async function getStaticProps(context) {
   // console.log('Calling getStaticProps');
@@ -22,6 +24,8 @@ const Home = ({ blogs }) => {
   const [filter, setFilter] = useState({
     view: { list: 0 }
   });
+
+  const { data, error } = useSWR('api/hello', fetcher);
 
   return (
     <div className="blog-detail-page">
