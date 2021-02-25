@@ -15,12 +15,12 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const blog = await getBlogBySlug(params.slug);
   return {
-    props: { blog }
+    props: { blog },
+    revalidate: 1
   };
 }
 
 const BlogDetail = ({ blog }) => {
-  console.log('Displaying page');
   // debugger;
   return (
     <>
