@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import useSWR from 'swr';
 
 import AuthorIntro from '@/components/AuthorIntro';
 import CardListItem from '@/components/CardListItem';
@@ -8,24 +7,27 @@ import CardItem from '@/components/CardItem';
 import FilteringMenu from 'components/FilteringMenu';
 
 import { getAllBlogs } from '@/lib/api';
-import { fetcher } from '@/lib/fetcher';
+import { useGetBlogs } from 'actions';
 
 export async function getStaticProps(context) {
-  // console.log('Calling getStaticProps');
-  const blogs = await getAllBlogs();
+  const blogs = await getAllBlogs({ offset: 0 });
   return {
     props: {
       blogs
-    }
+    },
+    revalidate: 1
   };
 }
 
-const Home = ({ blogs }) => {
+const Home = ({ blogs: initialData }) => {
   const [filter, setFilter] = useState({
     view: { list: 0 }
   });
 
-  const { data, error } = useSWR('api/hello', fetcher);
+  const { data: blogs, error } = useGetBlogs(initialData);
+
+  if (error) return <div>failed to load</div>;
+  if (!blogs) return <div>loading...</div>;
 
   return (
     <div className="blog-detail-page">
