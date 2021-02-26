@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useSWR, { useSWRPages } from 'swr';
 import { Col } from 'react-bootstrap';
 
@@ -7,13 +8,21 @@ import CardItem from '@/components/CardItem';
 import { useGetBlogs } from 'actions';
 
 export const useGetBlogsPages = ({ blogs, filter }) => {
+  useEffect(() => {
+    window.__pagination__init = true;
+  }, []);
+
   return useSWRPages(
     'index-page',
     ({ offset, withSWR }) => {
       let initialData = !offset && blogs;
 
+      if (typeof window !== 'undefined' && window.__pagination__init) {
+        initialData = null;
+      }
+
       const { data: paginatedBlogs, error } = withSWR(
-        useGetBlogs({ offset }, initialData)
+        useGetBlogs({ offset, filter }, initialData)
       );
 
       if (!paginatedBlogs) return <div>loading...</div>;

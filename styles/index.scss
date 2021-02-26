@@ -337,5 +337,9 @@ body {
 .react-list-icons {
   vertical-align: middle;
   font-size: 36px;
-  color: rgb(104, 0, 83);
+  // color: rgb(104, 0, 83);
+}
+
+.filtering-menu {
+  display: flex;
 }

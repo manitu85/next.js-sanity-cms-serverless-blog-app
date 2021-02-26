@@ -11,11 +11,10 @@ import { getAllBlogs } from '@/lib/api';
 import { useGetBlogs } from 'actions';
 
 export async function getStaticProps(context) {
-  const blogs = await getAllBlogs({ offset: 0 });
+  const blogs = await getAllBlogs({ offset: 0, date: 'desc' });
+
   return {
-    props: {
-      blogs
-    },
+    props: { blogs },
     revalidate: 1
   };
 }
@@ -23,7 +22,8 @@ export async function getStaticProps(context) {
 // const Home = ({ blogs: initialData }) => {
 const Home = ({ blogs }) => {
   const [filter, setFilter] = useState({
-    view: { list: 0 }
+    view: { list: 0 },
+    date: { asc: 0 }
   });
 
   // const { data: blogs, error } = useGetBlogs(initialData);
