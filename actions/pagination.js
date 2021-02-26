@@ -1,4 +1,4 @@
-import useSWRPages from 'swr';
+import useSWR, { useSWRPages } from 'swr';
 import { Col } from 'react-bootstrap';
 
 import CardListItem from '@/components/CardListItem';
@@ -10,9 +10,12 @@ export const useGetBlogsPages = ({ blogs: initialData, filter }) => {
   return useSWRPages(
     'index-page',
     ({ offset, withSWR }) => {
-      const { data: blogs } = withSWR(useGetBlogs(initialData));
+      const { data: blogs, error } = withSWR(useGetBlogs(initialData));
 
-      if (!blogs) return 'Loading...';
+      console.log('blogs from pagination :>> ', blogs);
+
+      if (!blogs) return <div>loading...</div>;
+      if (error) return <div>failed to load</div>;
 
       return blogs.map((blog) =>
         filter.view.list ? (

@@ -25,7 +25,7 @@ const BlogDetail = ({ blog }) => {
   return (
     <>
       <Row>
-        <Col md={{ span: 10, offset: 1 }}>
+        <Col md={{ span: 8, offset: 2 }}>
           <BlogHeader
             title={blog.title}
             subtitle={blog.subtitle}

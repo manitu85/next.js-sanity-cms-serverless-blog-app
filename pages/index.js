@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import AuthorIntro from '@/components/AuthorIntro';
-import CardListItem from '@/components/CardListItem';
-import CardItem from '@/components/CardItem';
 import FilteringMenu from 'components/FilteringMenu';
+// import CardListItem from '@/components/CardListItem';
+// import CardItem from '@/components/CardItem';
 
+import { useGetBlogsPages } from 'actions/pagination';
 import { getAllBlogs } from '@/lib/api';
 import { useGetBlogs } from 'actions';
 
@@ -19,28 +20,31 @@ export async function getStaticProps(context) {
   };
 }
 
-const Home = ({ blogs: initialData }) => {
+// const Home = ({ blogs: initialData }) => {
+const Home = ({ blogs }) => {
   const [filter, setFilter] = useState({
     view: { list: 0 }
   });
 
-  const { data: blogs, error } = useGetBlogs(initialData);
+  // const { data: blogs, error } = useGetBlogs(initialData);
 
-  if (error) return <div>failed to load</div>;
-  if (!blogs) return <div>loading...</div>;
+  const { pages, isLoadingMore, isReachingEnd, loadMore } = useGetBlogsPages({
+    blogs,
+    filter
+  });
+
+  console.log('pages from ssr :>> ', pages);
 
   return (
     <div className="blog-detail-page">
       <AuthorIntro />
       <FilteringMenu
         filter={filter}
-        onChange={(option, value) => {
-          setFilter({ ...filter, [option]: value });
-        }}
+        onChange={(option, value) => setFilter({ ...filter, [option]: value })}
       />
       <hr />
       <Row className="mb-5">
-        {blogs.map((blog) =>
+        {/* {blogs.map((blog) =>
           filter.view.list ? (
             <Col key={`${blog.slug}-list`} md="9">
               <CardListItem
@@ -64,7 +68,8 @@ const Home = ({ blogs: initialData }) => {
               />
             </Col>
           )
-        )}
+        )} */}
+        {pages}
       </Row>
     </div>
   );
