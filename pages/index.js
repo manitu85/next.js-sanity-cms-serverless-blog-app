@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 
 import AuthorIntro from '@/components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
@@ -33,7 +33,7 @@ const Home = ({ blogs }) => {
     filter
   });
 
-  console.log('pages from ssr :>> ', pages);
+  // console.log('pages from ssr :>> ', pages);
 
   return (
     <div className="blog-detail-page">
@@ -43,8 +43,29 @@ const Home = ({ blogs }) => {
         onChange={(option, value) => setFilter({ ...filter, [option]: value })}
       />
       <hr />
-      <Row className="mb-5">
-        {/* {blogs.map((blog) =>
+      <Row className="mb-5">{pages}</Row>
+      <div style={{ textAlign: 'center' }}>
+        <Button
+          onClick={loadMore}
+          disabled={isReachingEnd || isLoadingMore}
+          size="lg"
+          variant="outline-secondary"
+        >
+          {isLoadingMore
+            ? '...'
+            : isReachingEnd
+            ? 'No more blogs'
+            : 'More Blogs'}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+{
+  /* {blogs.map((blog) =>
           filter.view.list ? (
             <Col key={`${blog.slug}-list`} md="9">
               <CardListItem
@@ -68,11 +89,5 @@ const Home = ({ blogs }) => {
               />
             </Col>
           )
-        )} */}
-        {pages}
-      </Row>
-    </div>
-  );
-};
-
-export default Home;
+        )} */
+}

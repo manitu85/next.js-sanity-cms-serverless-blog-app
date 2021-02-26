@@ -6,18 +6,20 @@ import CardItem from '@/components/CardItem';
 
 import { useGetBlogs } from 'actions';
 
-export const useGetBlogsPages = ({ blogs: initialData, filter }) => {
+export const useGetBlogsPages = ({ blogs, filter }) => {
   return useSWRPages(
     'index-page',
     ({ offset, withSWR }) => {
-      const { data: blogs, error } = withSWR(useGetBlogs(initialData));
+      let initialData = !offset && blogs;
 
-      console.log('blogs from pagination :>> ', blogs);
+      const { data: paginatedBlogs, error } = withSWR(
+        useGetBlogs({ offset }, initialData)
+      );
 
-      if (!blogs) return <div>loading...</div>;
+      if (!paginatedBlogs) return <div>loading...</div>;
       if (error) return <div>failed to load</div>;
 
-      return blogs.map((blog) =>
+      return paginatedBlogs.map((blog) =>
         filter.view.list ? (
           <Col key={`${blog.slug}-list`} md="9">
             <CardListItem
@@ -47,7 +49,9 @@ export const useGetBlogsPages = ({ blogs: initialData, filter }) => {
     // SWR: data you will get from 'withSWR' function
     // index: number of current page
     (SWR, index) => {
-      return 0;
+      // Computed offset here!
+      if (SWR.data && SWR.data.length === 0) return null;
+      return (index + 1) * 3;
     },
     [filter]
   );
