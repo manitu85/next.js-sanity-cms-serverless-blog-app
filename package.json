@@ -13,6 +13,7 @@
     "@sanity/image-url": "^0.140.22",
     "bootstrap": "^4.6.0",
     "highlight.js": "^10.6.0",
+    "moment": "^2.29.1",
     "next": "10.0.5",
     "node-sass": "^5.0.0",
     "react": "17.0.1",

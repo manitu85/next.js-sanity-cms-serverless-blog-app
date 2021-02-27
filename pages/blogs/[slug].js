@@ -1,6 +1,9 @@
+import moment from 'moment';
 import { Row, Col } from 'react-bootstrap';
+
 import BlogHeader from '@/components/BlogHeader';
 import BlogContent from 'components/BlogContent';
+
 import { getAllBlogs, getBlogBySlug, urlFor } from '@/lib/api';
 
 export async function getStaticPaths() {
@@ -31,10 +34,10 @@ const BlogDetail = ({ blog }) => {
             subtitle={blog.subtitle}
             coverImage={urlFor(blog.coverImage).height(600).url()}
             author={blog.author}
-            date={blog.date}
+            date={moment(blog.date).format('LLL')}
           />
           <hr />
-          <BlogContent content={blog.content} />
+          {blog.content && <BlogContent content={blog.content} />}
         </Col>
       </Row>
     </>

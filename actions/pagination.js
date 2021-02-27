@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSWRPages } from 'swr';
 import { Col } from 'react-bootstrap';
+import moment from 'moment';
 
 import CardListItem from '@/components/CardListItem';
 import CardItem from '@/components/CardItem';
@@ -53,7 +54,7 @@ export const useGetBlogsPages = ({ blogs, filter }) => {
               author={blog.author}
               title={blog.title}
               subtitle={blog.subtitle}
-              date={blog.date}
+              date={moment(blog.date).format('LLL')}
               image={blog.coverImage}
               slug={blog.slug}
             />
@@ -64,7 +65,7 @@ export const useGetBlogsPages = ({ blogs, filter }) => {
               author={blog.author}
               title={blog.title}
               subtitle={blog.subtitle}
-              date={blog.date}
+              date={moment(blog.date).format('LLL')}
               image={blog.coverImage}
               slug={blog.slug}
             />
