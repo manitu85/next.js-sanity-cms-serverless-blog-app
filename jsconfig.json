@@ -7,6 +7,7 @@
       "@/pages/*": ["pages/*"],
       "@/lib/*": ["lib/*"],
       "@/utils/*": ["utils/*"],
+      "@/theme/*": ["theme/*"],
       "@/actions/*": ["actions/*"],
       "@/styles/*": ["styles/*"]
     }
