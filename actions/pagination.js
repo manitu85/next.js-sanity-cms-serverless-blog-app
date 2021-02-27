@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
-import useSWR, { useSWRPages } from 'swr';
+import { useSWRPages } from 'swr';
 import { Col } from 'react-bootstrap';
 
 import CardListItem from '@/components/CardListItem';
 import CardItem from '@/components/CardItem';
+import CardItemSkeleton from '@/components/CardItemSkeleton';
 
 import { useGetBlogs } from 'actions';
+import CardListItemSkeleton from '@/components/CardListItemSkeleton';
 
 export const useGetBlogsPages = ({ blogs, filter }) => {
   useEffect(() => {
@@ -25,7 +27,23 @@ export const useGetBlogsPages = ({ blogs, filter }) => {
         useGetBlogs({ offset, filter }, initialData)
       );
 
-      if (!paginatedBlogs) return <div>loading...</div>;
+      // Loading more items
+      if (!paginatedBlogs) {
+        return Array(3)
+          .fill(0)
+          .map((_, idx) =>
+            filter.view.list ? (
+              <Col key={`${idx}-item`} md="9">
+                <CardListItemSkeleton />
+              </Col>
+            ) : (
+              <Col key={idx} md="4">
+                <CardItemSkeleton />
+              </Col>
+            )
+          );
+      }
+
       if (error) return <div>failed to load</div>;
 
       return paginatedBlogs.map((blog) =>
@@ -60,7 +78,7 @@ export const useGetBlogsPages = ({ blogs, filter }) => {
     (SWR, index) => {
       // Computed offset here!
       if (SWR.data && SWR.data.length === 0) return null;
-      return (index + 1) * 3;
+      return (index + 1) * 6;
     },
     [filter]
   );

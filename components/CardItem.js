@@ -2,9 +2,17 @@ import NextLink from 'next/link';
 import { Card } from 'react-bootstrap';
 import { urlFor } from '@/lib/api';
 
-const CardItem = ({ title, subtitle, image, date, author, slug }) => {
+const CardItem = ({
+  title,
+  subtitle,
+  image,
+  date,
+  author,
+  slug,
+  mode = 'normal'
+}) => {
   return (
-    <Card className={`fj-card`}>
+    <Card className={`fj-card ${mode}`}>
       <div className="card-body-wrapper">
         <Card.Header className="d-flex flex-row">
           <img
@@ -15,21 +23,47 @@ const CardItem = ({ title, subtitle, image, date, author, slug }) => {
             alt="avatar"
           />
           <div>
-            <Card.Title className="font-weight-bold mb-1">
-              {author?.name}
-            </Card.Title>
-            <Card.Text className="card-date">{date}</Card.Text>
+            {mode === 'placeholder' ? (
+              <>
+                <Card.Title className="font-weight-bold mb-1">
+                  Placeholder Title
+                </Card.Title>
+                <Card.Text className="card-date">Placeholder Date</Card.Text>
+              </>
+            ) : (
+              <>
+                <Card.Title className="font-weight-bold mb-1">
+                  {author?.name}
+                </Card.Title>
+                <Card.Text className="card-date">{date}</Card.Text>
+              </>
+            )}
           </div>
         </Card.Header>
         <div className="view overlay">
-          <Card.Img
-            src={urlFor(image).height(300).crop('center').fit('clip').url()}
-            alt="Card image cap"
-          />
+          {mode === 'placeholder' ? (
+            <div className="image-placeholder" />
+          ) : (
+            <Card.Img
+              src={urlFor(image).height(300).crop('center').fit('clip').url()}
+              alt="Card image cap"
+            />
+          )}
         </div>
         <Card.Body>
-          <Card.Title className="card-main-title">{title}</Card.Title>
-          <Card.Text>{subtitle}</Card.Text>
+          {mode === 'placeholder' ? (
+            <>
+              <Card.Title className="card-main-title">
+                Placeholder Title
+              </Card.Title>
+              <Card.Text>Placeholder Subtitle</Card.Text>
+            </>
+          ) : (
+            <>
+              <Card.Title className="card-main-title">{title}</Card.Title>
+              <Card.Text>{subtitle}</Card.Text>
+            </>
+          )}
         </Card.Body>
       </div>
       <NextLink as={`/blogs/${slug}`} href="/blogs/[slug]">
