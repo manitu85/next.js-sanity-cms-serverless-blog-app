@@ -5,13 +5,13 @@ import AuthorIntro from '@/components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
 // import CardListItem from '@/components/CardListItem';
 // import CardItem from '@/components/CardItem';
+// import { useGetBlogs } from 'actions';
 
 import { useGetBlogsPages } from 'actions/pagination';
-import { getAllBlogs } from '@/lib/api';
-import { useGetBlogs } from 'actions';
+import { getPaginatedBlogs } from 'lib/api';
 
 export async function getStaticProps(context) {
-  const blogs = await getAllBlogs({ offset: 0, date: 'desc' });
+  const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
 
   return {
     props: { blogs },
@@ -19,21 +19,16 @@ export async function getStaticProps(context) {
   };
 }
 
-// const Home = ({ blogs: initialData }) => {
 const Home = ({ blogs }) => {
   const [filter, setFilter] = useState({
     view: { list: 0 },
     date: { asc: 0 }
   });
 
-  // const { data: blogs, error } = useGetBlogs(initialData);
-
   const { pages, isLoadingMore, isReachingEnd, loadMore } = useGetBlogsPages({
     blogs,
     filter
   });
-
-  // console.log('pages from ssr :>> ', pages);
 
   return (
     <div className="blog-detail-page">
@@ -63,31 +58,3 @@ const Home = ({ blogs }) => {
 };
 
 export default Home;
-
-{
-  /* {blogs.map((blog) =>
-          filter.view.list ? (
-            <Col key={`${blog.slug}-list`} md="9">
-              <CardListItem
-                author={blog.author}
-                title={blog.title}
-                subtitle={blog.subtitle}
-                date={blog.date}
-                image={blog.coverImage}
-                slug={blog.slug}
-              />
-            </Col>
-          ) : (
-            <Col key={blog.slug} md="4">
-              <CardItem
-                author={blog.author}
-                title={blog.title}
-                subtitle={blog.subtitle}
-                date={blog.date}
-                image={blog.coverImage}
-                slug={blog.slug}
-              />
-            </Col>
-          )
-        )} */
-}

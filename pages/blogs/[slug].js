@@ -1,21 +1,27 @@
+import ErrorPage from 'next/error';
+import { useRouter } from 'next/router';
 import moment from 'moment';
-import { Row, Col } from 'react-bootstrap';
 
+import { Row, Col } from 'react-bootstrap';
 import BlogHeader from '@/components/BlogHeader';
-import BlogContent from 'components/BlogContent';
+import BlogContent from '@/components/BlogContent';
 
 import { getAllBlogs, getBlogBySlug, urlFor } from '@/lib/api';
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs();
+  console.log('blogs :>> ', blogs);
   const paths = blogs?.map((blog) => ({ params: { slug: blog.slug } }));
+  console.log('paths :>> ', paths);
   return {
     paths,
-    fallback: false
+    fallback: true
   };
 }
 
 export async function getStaticProps({ params }) {
+  console.log('params :>> ', params);
+  console.log('Loading blog detail page');
   const blog = await getBlogBySlug(params.slug);
   return {
     props: { blog },
@@ -24,7 +30,17 @@ export async function getStaticProps({ params }) {
 }
 
 const BlogDetail = ({ blog }) => {
-  // debugger;
+  const router = useRouter();
+
+  if (!router.isFallback && !blog?.slug) {
+    return <ErrorPage statusCode="404" />;
+  }
+
+  if (router.isFallback) {
+    console.log('Loading fallback page');
+    return <div className="blog-detail-page">Loading...</div>;
+  }
+
   return (
     <>
       <Row>
