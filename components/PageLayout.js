@@ -17,7 +17,7 @@ const PageLayout = ({ children, className }) => {
         />
       </Head>
       <Container>
-        <BlogNavbar theme={theme} toggle={toggleTheme} />
+        <BlogNavbar theme={theme} toggleTheme={toggleTheme} />
         <div className={`page-wrapper ${className}`}>{children}</div>
         <Footer />
       </Container>
