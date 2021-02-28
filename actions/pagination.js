@@ -45,7 +45,7 @@ export const useGetBlogsPages = ({ blogs, filter }) => {
           );
       }
 
-      // if (error) return <div>failed to load</div>;
+      if (error) return <div>failed to load</div>;
 
       return paginatedBlogs.map((blog) =>
         filter.view.list ? (
@@ -79,7 +79,7 @@ export const useGetBlogsPages = ({ blogs, filter }) => {
     (SWR, index) => {
       // Computed offset here!
       if (SWR.data && SWR.data.length === 0) return null;
-      return (index + 1) * 3;
+      return (index + 1) * 6;
     },
     [filter]
   );

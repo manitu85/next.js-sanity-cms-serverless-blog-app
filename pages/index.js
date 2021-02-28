@@ -5,13 +5,11 @@ import AuthorIntro from '@/components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
 // import CardListItem from '@/components/CardListItem';
 // import CardItem from '@/components/CardItem';
-// import { useGetBlogs } from 'actions';
 
 import { useGetBlogsPages } from 'actions/pagination';
 import { getPaginatedBlogs, getAllBlogs } from 'lib/api';
 
 export async function getStaticProps(context) {
-  // const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
   const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
 
   return {
