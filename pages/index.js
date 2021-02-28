@@ -8,9 +8,10 @@ import FilteringMenu from 'components/FilteringMenu';
 // import { useGetBlogs } from 'actions';
 
 import { useGetBlogsPages } from 'actions/pagination';
-import { getPaginatedBlogs } from 'lib/api';
+import { getPaginatedBlogs, getAllBlogs } from 'lib/api';
 
 export async function getStaticProps(context) {
+  // const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
   const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
 
   return {
