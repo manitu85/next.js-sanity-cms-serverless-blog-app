@@ -9,29 +9,24 @@ import BlogContent from '@/components/BlogContent';
 
 import { getAllBlogs, getBlogBySlug, urlFor } from '@/lib/api';
 
-export async function getStaticPaths() {
-  const blogs = await getAllBlogs();
-  // console.log('blogs :>> ', blogs);
-  const paths = blogs?.map((blog) => ({ params: { slug: blog.slug } }));
-  // console.log('paths :>> ', paths);
-  return {
-    paths,
-    fallback: true
-  };
-}
-
 export async function getStaticProps({ params, preview = false, previewData }) {
-  // console.log('params :>> ', params);
-  // console.log('Loading blog detail page');
-  // console.log('Preview is:', preview);
-  // console.log('Preview previewData:', previewData);
-  const blog = await getBlogBySlug(params.slug);
+  const blog = await getBlogBySlug(params.slug, preview);
   return {
     props: {
       blog,
       preview
     },
     revalidate: 1
+  };
+}
+
+export async function getStaticPaths() {
+  const blogs = await getAllBlogs();
+  const paths = blogs?.map((blog) => ({ params: { slug: blog.slug } }));
+
+  return {
+    paths,
+    fallback: true
   };
 }
 
@@ -43,7 +38,6 @@ const BlogDetail = ({ blog, preview }) => {
   }
 
   if (router.isFallback) {
-    // console.log('Loading fallback page');
     return <div className="blog-detail-page">Loading...</div>;
   }
 
@@ -68,3 +62,11 @@ const BlogDetail = ({ blog, preview }) => {
 };
 
 export default BlogDetail;
+
+// console.log('params :>> ', params);
+// console.log('Loading blog detail page');
+// console.log('Preview is:', preview);
+// console.log('Preview previewData:', previewData);
+// console.log('Loading fallback page');
+// console.log('paths :>> ', paths);
+// console.log('blogs :>> ', blogs);

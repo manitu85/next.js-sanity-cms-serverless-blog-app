@@ -40,7 +40,7 @@ const CardItem = ({
             )}
           </div>
         </Card.Header>
-        <div className="view overlay">
+        <div className="view overlay" style={{ maxHeight: '300px' }}>
           {mode === 'placeholder' ? (
             <div className="image-placeholder" />
           ) : (

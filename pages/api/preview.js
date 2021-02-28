@@ -11,11 +11,9 @@ export default async function enablePreview(req, res) {
     return res.status(401).json({ message: 'Invalid slug' });
   }
 
-  // setPreviewData will set cookies into you browsert
+  // setPreviewData will set cookies into you browsers
   // __prerender_bypass __next_preview_data
   res.setPreviewData({});
   res.writeHead(307, { Location: `/blogs/${blog.slug}` });
   res.end();
-
-  // return res.status(200).json({ message: 'You may continue' });
 }

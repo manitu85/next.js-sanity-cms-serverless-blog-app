@@ -1,9 +1,11 @@
 import NextLink from 'next/link';
 import { Card } from 'react-bootstrap';
+import { urlFor } from '@/lib/api';
 
 const CardListItem = ({
   title,
   subtitle,
+  image,
   author,
   slug,
   date,
@@ -36,19 +38,35 @@ const CardListItem = ({
             </div>
           )}
         </Card.Header>
-        <Card.Body>
+        <Card.Body style={{ display: 'flex', gap: '2rem' }}>
+          <div style={{ maxWidth: '300px' }} className="view overlay">
+            {mode === 'placeholder' ? (
+              <div className="image-placeholder" />
+            ) : (
+              image && (
+                <Card.Img
+                  src={urlFor(image)
+                    .height(300)
+                    .crop('center')
+                    .fit('clip')
+                    .url()}
+                  alt="Card image cap"
+                />
+              )
+            )}
+          </div>
           {mode === 'placeholder' ? (
-            <>
+            <div style={{ alignSelf: 'center' }}>
               <Card.Title className="card-main-title">
                 Placeholder Title
               </Card.Title>
               <Card.Text>Placeholder Subtitle</Card.Text>
-            </>
+            </div>
           ) : (
-            <>
+            <div style={{ alignSelf: 'center' }}>
               <Card.Title className="card-main-title">{title}</Card.Title>
               <Card.Text>{subtitle}</Card.Text>
-            </>
+            </div>
           )}
         </Card.Body>
       </div>
