@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 
 import { Row, Col } from 'react-bootstrap';
+import PreviewAlert from '@/components/PreviewAlert';
 import BlogHeader from '@/components/BlogHeader';
 import BlogContent from '@/components/BlogContent';
 
@@ -19,17 +20,22 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview = false, previewData }) {
   // console.log('params :>> ', params);
   // console.log('Loading blog detail page');
+  // console.log('Preview is:', preview);
+  // console.log('Preview previewData:', previewData);
   const blog = await getBlogBySlug(params.slug);
   return {
-    props: { blog },
+    props: {
+      blog,
+      preview
+    },
     revalidate: 1
   };
 }
 
-const BlogDetail = ({ blog }) => {
+const BlogDetail = ({ blog, preview }) => {
   const router = useRouter();
 
   if (!router.isFallback && !blog?.slug) {
@@ -37,7 +43,7 @@ const BlogDetail = ({ blog }) => {
   }
 
   if (router.isFallback) {
-    console.log('Loading fallback page');
+    // console.log('Loading fallback page');
     return <div className="blog-detail-page">Loading...</div>;
   }
 
@@ -45,6 +51,7 @@ const BlogDetail = ({ blog }) => {
     <>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
+          {preview && <PreviewAlert />}
           <BlogHeader
             title={blog.title}
             subtitle={blog.subtitle}

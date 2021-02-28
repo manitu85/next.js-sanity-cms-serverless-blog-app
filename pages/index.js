@@ -3,22 +3,26 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 import AuthorIntro from '@/components/AuthorIntro';
 import FilteringMenu from 'components/FilteringMenu';
+import PreviewAlert from '@/components/PreviewAlert';
 // import CardListItem from '@/components/CardListItem';
 // import CardItem from '@/components/CardItem';
 
 import { useGetBlogsPages } from 'actions/pagination';
 import { getPaginatedBlogs, getAllBlogs } from 'lib/api';
 
-export async function getStaticProps(context) {
+export async function getStaticProps({ preview = false }) {
   const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
 
   return {
-    props: { blogs },
+    props: {
+      blogs,
+      preview
+    },
     revalidate: 1
   };
 }
 
-const Home = ({ blogs }) => {
+const Home = ({ blogs, preview }) => {
   const [filter, setFilter] = useState({
     view: { list: 0 },
     date: { asc: 0 }
@@ -31,6 +35,7 @@ const Home = ({ blogs }) => {
 
   return (
     <div className="blog-detail-page">
+      {preview && <PreviewAlert />}
       <AuthorIntro />
       <FilteringMenu
         filter={filter}
