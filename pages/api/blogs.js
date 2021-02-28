@@ -5,7 +5,6 @@ export default async function getBlogs(req, res) {
   const date = req.query.date || 'desc';
 
   const data = await getPaginatedBlogs({ offset, date });
-  // const data = await getAllBlogs({ offset, date });
 
   res.status(200).json(data);
 }

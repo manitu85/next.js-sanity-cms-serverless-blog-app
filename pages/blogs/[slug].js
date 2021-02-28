@@ -10,9 +10,9 @@ import { getAllBlogs, getBlogBySlug, urlFor } from '@/lib/api';
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs();
-  console.log('blogs :>> ', blogs);
+  // console.log('blogs :>> ', blogs);
   const paths = blogs?.map((blog) => ({ params: { slug: blog.slug } }));
-  console.log('paths :>> ', paths);
+  // console.log('paths :>> ', paths);
   return {
     paths,
     fallback: true
@@ -20,8 +20,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  console.log('params :>> ', params);
-  console.log('Loading blog detail page');
+  // console.log('params :>> ', params);
+  // console.log('Loading blog detail page');
   const blog = await getBlogBySlug(params.slug);
   return {
     props: { blog },
