@@ -40,7 +40,7 @@ const CardItem = ({
             )}
           </div>
         </Card.Header>
-        <div className="view overlay" style={{ maxHeight: '300px' }}>
+        <div className="view overlay">
           {mode === 'placeholder' ? (
             <div className="image-placeholder" />
           ) : (
@@ -63,11 +63,11 @@ const CardItem = ({
           ) : (
             <>
               <Card.Title className="card-main-title">
-                {title.length > 40 ? subtitle.substr(0, 40) + '...' : title}
+                {title.length > 60 ? subtitle.substr(0, 60) + '...' : title}
               </Card.Title>
               <Card.Text>
-                {subtitle.length > 40
-                  ? subtitle.substr(0, 40) + '...'
+                {subtitle.length > 60
+                  ? subtitle.substr(0, 60) + '...'
                   : subtitle}
               </Card.Text>
             </>
