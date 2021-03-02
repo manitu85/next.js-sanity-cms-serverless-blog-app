@@ -8,7 +8,7 @@ import PreviewAlert from '@/components/PreviewAlert';
 // import CardItem from '@/components/CardItem';
 
 import { useGetBlogsPages } from 'actions/pagination';
-import { getPaginatedBlogs, getAllBlogs } from 'lib/api';
+import { getPaginatedBlogs } from 'lib/api';
 
 export async function getStaticProps({ preview = false }) {
   const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });

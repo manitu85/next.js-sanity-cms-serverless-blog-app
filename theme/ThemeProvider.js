@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { ThemeContext } from './ThemeContext';
-import { themes } from '.';
+import { themes } from './theme';
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(themes.light);
@@ -14,10 +14,11 @@ const ThemeProvider = ({ children }) => {
 
   const setMode = (mode) => {
     window.localStorage.setItem('theme', mode);
-    setTheme(mode);
+    setTheme(theme === themes.dark ? themes.light : themes.dark);
+    // setTheme(mode);
   };
   // prettier-ignore
-  const toggleTheme = () => theme === themes.dark ? setMode(themes.light) : setMode(themes.dark)
+  const toggleTheme = () => theme === themes.dark ? setMode(themes.light.type) : setMode(themes.dark.type)
 
   // const toggleTheme = () =>
   //   setTheme(theme === themes.dark ? themes.light : themes.dark);
