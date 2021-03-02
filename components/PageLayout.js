@@ -6,7 +6,9 @@ import BlogNavbar from './Navbar';
 import Footer from './Footer';
 
 const PageLayout = ({ children, className }) => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, mountedComponent } = useTheme();
+
+  if (!mountedComponent) return <div />;
 
   return (
     <div className={theme.type}>
