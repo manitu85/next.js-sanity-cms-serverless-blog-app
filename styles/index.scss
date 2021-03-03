@@ -242,11 +242,13 @@ body {
   &-left {
     float: left;
     margin-right: 30px;
+    max-width: 50%;
   }
 
   &-right {
     float: right;
     margin-left: 30px;
+    max-width: 50%;
   }
 
   > img {
@@ -409,6 +411,7 @@ blockquote {
   background-position: 0 0;
   background-origin: border-box;
   background-size: 2em;
+  border-left: 3px solid #00a6ff;
 }
 
 .day-night-toggle.react-toggle {
